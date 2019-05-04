@@ -145,13 +145,11 @@ This was our final approach to the problem.
 
 Note that I am using Mac and fish shell (which I highly recommend), so your commands might differ slightly if you are using a different operating system or shell.
 
-Clone the minimal Node / Express with TypeScript boilerplate. As the name suggests this is a minimal Node / Express app using TypeScript, so I won't get into details. Here I clone the repository to `pick-from-dto`.
+Clone the minimal Node / Express with TypeScript boilerplate. As the name suggests this is a minimal Node / Express app using TypeScript, so I won't get into details. You can clone or download the code here:
 
-```bash
-git clone git@github.com:oyalhi/typescript-node-express-minimal-boilerplate.git pick-from-dto
-```
+> https://github.com/oyalhi/typescript-node-express-minimal-boilerplate
 
-Go into the folder, install the dependencies and open your editor, here I'm using VS Code:
+After cloning or downloading, go into the project folder, install the dependencies and open your editor, here I'm using VS Code:
 
 ```bash
 cd pick-from-dto
@@ -230,6 +228,8 @@ Then we update the `nodemon.json`:
 ```
 
 That's it, we've updated nodemon as well the `start` script. Just run `yarn start` or `yarn watch` and implement our approach to the code. If you are feeling lazy, you can find the final code here:
+
+> https://github.com/oyalhi/update-using-dto
 
 ## Conclusion
 
