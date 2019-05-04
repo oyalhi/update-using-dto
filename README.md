@@ -2,9 +2,9 @@
 
 ## The Problem
 
-When writing a REST API, the common problem I face is when updating an object with a given object. I need to make sure the update object has only the certain 'allowed' properties so that I don't inadvertently change protected properties, such as password or any other field that I don't want it to change.
+When writing a REST API, the common problem I face is when updating an object with a given object. I need to make sure the update object has only the certain 'allowed' properties so that I don't inadvertently change protected properties, such as a password or any other field that I don't want it to change.
 
-I usually do this by checking each property manually and updating the object accordingly. However, I wanted a better, more re-usable approach, so that I don't have to manually check each property. In this article I try to explain the steps and the final solution that I've come up with.
+I usually do this by checking each property manually and updating the object accordingly. However, I wanted a better, more re-usable approach, so that I don't have to manually check each property. In this article, I try to explain the steps and the final solution that I've come up with.
 
 Let's assume we have the following `User` interface:
 
@@ -38,7 +38,7 @@ Here is what is happening:
 1. find the user via the `id` from the `params`
 2. if not found, send 404 and return
 3. get the requested properties to change, which are in `req.body`
-4. create a new object that updates the properties with the `json` objects' keys. Here we have a problem though. The new updated user will add any property that is sent via the json object, or update a property that is not allowed, such as password. For example, if the json object is the following:
+4. create a new object that updates the properties with the `json` objects' keys. Here we have a problem though. The new updated user will add any property that is sent via the JSON object or update a property that is not allowed, such as a password. For example, if the JSON object is the following:
 
    ```typescript
    json: {
@@ -110,7 +110,7 @@ app.put("/api/users/v3/:id", (req, res) => {
 2. if not found, send 404 and return
 3. get the requested properties to change, which are in `req.body`
 4. get the all the keys that we are allowed to change, defined by the `UpdateUserDto` data transfer object
-5. go over each allowed property, and if it matches the requested key, assign it. If not, then we use the original value. Here, going over the `UpdateUserDto` we are making sure that we are only changing the allowed properties. If the `json` object had a property, let's say `password`, because it didn't exist in the dto, it would be ignored.
+5. go over each allowed property, and if it matches the requested key, assign it. If not, then we use the original value. Here, going over the `UpdateUserDto` we are making sure that we are only changing the allowed properties. If the `json` object had a property, let's say `password` because it didn't exist in the DTO, it would be ignored.
 6. send back the updated user
 
 ## Approach #4
@@ -134,9 +134,9 @@ app.put("/api/users/v4/:id", (req, res) => {
 2. if not found, send 404 and return
 3. get the requested properties to change, which are in `req.body`
 4. get the all the keys that we are allowed to change, defined by the `UpdateUserDto` data transfer object
-5. from the requested json object, filter out the keys that doesn't exist in the UpdateUserDto
-6. length is more than 0 if there are keys that are not present in the dto, the length would be a truthy. if so, reject the request.
-7. go over each allowed property, and if it matches the requested key, assign it. If not, then we use the original value. Here, going over the `UpdateUserDto` we are making sure that we are only changing the allowed properties. If the `json` object had a property, let's say `password`, because it didn't exist in the dto, it would be ignored.
+5. from the requested JSON object, filter out the keys that don't exist in the UpdateUserDto
+6. length is more than 0 if there are keys that are not present in the DTO, the length would be a truthy. if so, reject the request.
+7. go over each allowed property, and if it matches the requested key, assign it. If not, then we use the original value. Here, going over the `UpdateUserDto` we are making sure that we are only changing the allowed properties. If the `json` object had a property, let's say `password` because it didn't exist in the DTO, it would be ignored.
 8. send back the updated user
 
 This was our final approach to the problem.
@@ -163,7 +163,7 @@ Let's run the boilerplate in watch mode by simply running the `watch` script whi
 yarn watch
 ```
 
-If all went well, we should see the message that server is listening on port 3000. We can exit the app and install the necessary libraries.
+If all went well, we should see the message that the server is listening on port 3000. We can exit the app and install the necessary libraries.
 
 First we need to install the custom transformer, `ts-transformers-key`:
 
@@ -171,7 +171,7 @@ First we need to install the custom transformer, `ts-transformers-key`:
 yarn add ts-transformer-key
 ```
 
-Unfortunately, TypeScript itself does not currently provide any easy way to use custom transformers. But with the help of a custom library `ttypescript` (note the double 't') we can easily compile our code. Let's install the library:
+Unfortunately, TypeScript itself does not currently provide an easy way to use custom transformers. But with the help of a custom library `ttypescript` (note the double 't') we can easily compile our code. Let's install the library:
 
 ```bash
 yarn add ttypescript
@@ -233,10 +233,10 @@ That's it, we've updated nodemon as well the `start` script. Just run `yarn star
 
 ## Conclusion
 
-Updating an object is common scenario in a back end application. I wanted a solution that did not require a manual update of the code every time the requirements for an object has changed. Also, a solution that I can use in any project without rewriting the same boilerplate code.
+Updating an object is a common scenario in a back end application. I wanted a solution that did not require a manual update of the code every time the requirements for an object has changed. Also, a solution that I can use in any project without rewriting the same boilerplate code.
 
-We went through 4 solutions, each one improving the previous version. The first approach was buggy, had a possibility of changing our object. The second approach was too manual, required to assign each property manually. The third approach solved the problem; however was accepting illegal requests, though only using accepted keys. Our fourth and final approach rejected illegal requests for a rock solid approach.
+We went through 4 solutions, each one improving the previous version. The first approach was buggy, had the possibility of changing our object. The second approach was too manual, required to assign each property manually. The third approach solved the problem; however was accepting illegal requests, though only using accepted keys. Our fourth and final approach rejected illegal requests for a rock solid approach.
 
-I wanted go one step further and create a generic function that could be use anywhere easily; however, we cannot use the `keys` dynamically and thus can't create a generic function. But for now what we have should suffice.
+I wanted to go one step further and create a generic function that could be used anywhere easily; however, we cannot use the `keys` dynamically and thus can't create a generic function. But for now, what we have should suffice.
 
 I hope you liked it!
