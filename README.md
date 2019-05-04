@@ -1,4 +1,4 @@
-# Update using DTO - with TypeScript
+# Updating an Object's Properties using TypeScript
 
 ## The Problem
 
