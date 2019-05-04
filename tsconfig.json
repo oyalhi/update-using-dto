@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "lib": ["es2015"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "paths": { "*": ["node_modules/*", "src/types/*"] },
+    "plugins": [{ "transform": "ts-transformer-keys/transformer" }],
+    "sourceMap": true,
+    "target": "es6"
+  },
+  "include": ["src/**/*"]
+}

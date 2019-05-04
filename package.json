@@ -1,0 +1,25 @@
+{
+  "name": "ts-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "ts-node -C ttypescript src/server.ts",
+    "watch": "nodemon"
+  },
+  "keywords": [],
+  "author": "Omer YALHI",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "nodemon": "^1.19.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "ts-node": "^8.1.0",
+    "ts-transformer-keys": "^0.3.4",
+    "ttypescript": "^1.5.6"
+  }
+}
